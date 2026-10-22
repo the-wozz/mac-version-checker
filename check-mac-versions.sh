@@ -829,10 +829,11 @@ fi
 [ "$UPDATE_STATE" = unknown ] && [ "$MODE" = deferred ] && exit 0
 
 # Required: make sure the dialog keeps coming back, even after a Force Quit.
+# The deferral count is only reported when an update is needed.
 if [ "$REQUIRED" = true ]; then
   reopen_soon
   echo "Deferrals used: $DEFER_COUNT of $MAX_DEFER_COUNT (update required)"
-else
+elif [ "$UPDATE_STATE" = update ]; then
   echo "Deferrals used: $DEFER_COUNT of $MAX_DEFER_COUNT"
 fi
 
